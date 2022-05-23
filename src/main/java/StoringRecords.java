@@ -24,11 +24,23 @@ public class StoringRecords {
     }
 
     public static ArrayList<Person> readRecordsFromFile(String file) {
-        ArrayList<Person> persons = new ArrayList<>();
+        ArrayList<Person> persons = new ArrayList<Person>();
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(file));
+        String line = br.readLine();
+        while (line != null){
+            String[] parts = line.split(",");
+            String name = parts[0];
+        int age = Integer.valueOf(parts[1]);
 
-        // Write here the code for reading from file
-        // and printing the read records
+        persons.add(new Person(name, age));
+        line = br.readLine();
+
+        }
         return persons;
-
+    }
+        catch(IOException e){
+            return null;
+        }
     }
 }
